@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.NoSuchElementException;
-
 @ControllerAdvice
 @RestController
 public class ExceptionAdvisor {
