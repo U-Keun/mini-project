@@ -1,6 +1,8 @@
 package com.example.miniproject.dto;
 
 
+import com.example.miniproject.entity.Comment;
+import com.example.miniproject.entity.Quiz;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -12,7 +14,7 @@ public class SolvingQuizResponseDto {
     private Long id;
     private String title;
     private String content;
-    List<String> answerList;
+    private List<String> answerList;
     private String userId;
     private boolean solved;
 
@@ -22,5 +24,15 @@ public class SolvingQuizResponseDto {
         this.content = content;
         this.answerList = answerList;
         this.userId = userId;
+    }
+
+    public SolvingQuizResponseDto(Quiz quiz, List<String> answerList) {
+        this.id = quiz.getId();
+        this.title = quiz.getTitle();
+        this.content = quiz.getContent();
+        this.answerList = answerList;
+        this.userId = quiz.getUserId();
+        this.solved = true;
+        this.commentList = quiz.getCommentList();
     }
 }

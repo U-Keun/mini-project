@@ -27,7 +27,7 @@ public class QuizController {
 
     // 퀴즈 게시글 등록
     @PostMapping("/register")
-    public QuizResponseDto register(@RequestBody QuizRequestDto quizRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public BasicResponseDto register(@RequestBody QuizRequestDto quizRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return quizService.register(quizRequestDto, userDetails.getUser());
     }
 

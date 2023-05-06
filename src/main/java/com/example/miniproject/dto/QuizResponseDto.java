@@ -10,10 +10,6 @@ public class QuizResponseDto {
     private Long id;
     private String title;
     private String content;
-    private String correct;
-    private String incorrect1;
-    private String incorrect2;
-    private String incorrect3;
     private String userId;
     private boolean solved;
 

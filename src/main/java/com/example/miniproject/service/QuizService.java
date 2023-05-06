@@ -25,18 +25,16 @@ public class QuizService {
 
 
     // 퀴즈 등록
-    @Transactional
-    public QuizResponseDto register(QuizRequestDto quizRequestDto, User user) {
+    public BasicResponseDto<?> register(QuizRequestDto quizRequestDto, User user) {
         Quiz quiz = new Quiz(quizRequestDto, user.getUserId());
-        Quiz savedQuiz = quizRepository.save(quiz);
-        return new QuizResponseDto(savedQuiz);
+        quizRepository.save(quiz);
+        return BasicResponseDto.setSuccess("퀴즈 등록 성공!", null);
     }
 
 
 
     // 개별 퀴즈 조회
-    @Transactional(readOnly = true)
-    public SolvingQuizResponseDto findById(Long id) {
+    public BasicResponseDto<SolvingQuizResponseDto> findById(Long id) {
         Quiz quiz = quizRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 퀴즈가 없습니다."));
         List<String> answerList = new ArrayList<>();
         answerList.add(quiz.getCorrect());
@@ -49,10 +47,9 @@ public class QuizService {
     }
 
     // 전체 퀴즈 조회
-    @Transactional(readOnly = true)
-    public List<QuizResponseDto> findAll() {
+    public BasicResponseDto<List<QuizResponseDto>> findAll() {
         List<Quiz> quizzes = quizRepository.findAll();
-        return quizzes.stream().map(QuizResponseDto::new).collect(Collectors.toList());
+        return BasicResponseDto.setSuccess("전체 게시글 조회 성공!", quizzes.stream().map(QuizResponseDto::new).collect(Collectors.toList()));
     }
 
     // 해결한 문제 조회
@@ -85,17 +82,17 @@ public class QuizService {
 
     // 퀴즈 게시물 수정
     @Transactional
-    public QuizResponseDto update(Long id, AmendRequestDto amendRequestDto, User user) {
+    public BasicResponseDto<?> update(Long id, AmendRequestDto amendRequestDto, User user) {
         Quiz quiz = quizRepository.findById(id).orElseThrow(
                 () -> new NullPointerException("해당 퀴즈가 없습니다.")
         );
 
         if(!StringUtils.equals(quiz.getId(), user.getId())) {
-            throw new IllegalArgumentException("회원을 찾을 수 없습니다.");
-        } else {
-            quiz.update(amendRequestDto);
-            return new QuizResponseDto(quiz);
+            return BasicResponseDto.setFailed("퀴즈의 작성자만 수정이 가능합니다.");
         }
+
+        quiz.update(amendRequestDto);
+        return BasicResponseDto.setSuccess("퀴즈 수정 성공!", null);
     }
 
     // 퀴즈 게시물 삭제
@@ -105,10 +102,10 @@ public class QuizService {
                 () -> new NullPointerException("해당 퀴즈가 없습니다.")
         );
         if(!StringUtils.equals(quiz.getId(), user.getId())) {
-            return new MsgResponseDto("아이디가 같지 않습니다.");
-        } else {
-            quizRepository.delete(quiz);
-            return new MsgResponseDto("퀴즈 삭제 성공");
+            return BasicResponseDto.setFailed("퀴즈의 작성자만 삭제가가 가능합니다.");
         }
+
+        quizRepository.delete(quiz);
+        return BasicResponseDto.setSuccess("퀴즈 삭제 성공", null);
     }
 }
