@@ -84,7 +84,7 @@ public class QuizService {
     @Transactional
     public BasicResponseDto<?> update(Long id, AmendRequestDto amendRequestDto, User user) {
         Quiz quiz = quizRepository.findById(id).orElseThrow(
-                () -> new NullPointerException("해당 퀴즈가 없습니다.")
+                () -> new IllegalArgumentException("해당 퀴즈가 없습니다.")
         );
 
         if(!StringUtils.equals(quiz.getId(), user.getId())) {
@@ -99,7 +99,7 @@ public class QuizService {
     @Transactional
     public BasicResponseDto<?> deleteAll(Long id, User user) {
         Quiz quiz = quizRepository.findById(id).orElseThrow(
-                () -> new NullPointerException("해당 퀴즈가 없습니다.")
+                () -> new IllegalArgumentException("해당 퀴즈가 없습니다.")
         );
 
         if(!StringUtils.equals(quiz.getId(), user.getId())) {

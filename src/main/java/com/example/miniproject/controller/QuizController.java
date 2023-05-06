@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/quiz")
+@RequestMapping("quiz")
 public class QuizController {
 
     private final QuizService quizService;
