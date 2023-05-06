@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class SolvingQuizResponseDto {
     private List<String> answerList;
     private String userId;
     private boolean solved;
-    private List<Comment> commentList;
+    private List<CommentResponseDto> commentList;
 
     public SolvingQuizResponseDto(Long id, String title, String content, List<String> answerList, String userId) {
         this.id = id;
@@ -34,6 +35,8 @@ public class SolvingQuizResponseDto {
         this.answerList = answerList;
         this.userId = quiz.getUserId();
         this.solved = true;
-        this.commentList = quiz.getCommentList();
+        this.commentList = quiz.getCommentList().stream()
+                .map(CommentResponseDto::new)
+                .collect(Collectors.toList());
     }
 }

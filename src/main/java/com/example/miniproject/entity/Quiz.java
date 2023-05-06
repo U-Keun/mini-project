@@ -1,6 +1,7 @@
 package com.example.miniproject.entity;
 
 import com.example.miniproject.dto.AmendRequestDto;
+import com.example.miniproject.dto.CommentResponseDto;
 import com.example.miniproject.dto.QuizRequestDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
