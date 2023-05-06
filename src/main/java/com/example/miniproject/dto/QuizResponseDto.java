@@ -18,9 +18,6 @@ public class QuizResponseDto {
         this.userId = quiz.getUserId();
         this.title = quiz.getTitle();
         this.content = quiz.getContent();
-        this.correct = quiz.getCorrect();
-        this.incorrect1 = quiz.getIncorrect1();
-        this.incorrect2 = quiz.getIncorrect2();
-        this.incorrect3 = quiz.getIncorrect3();
+        this.solved = true;
     }
 }

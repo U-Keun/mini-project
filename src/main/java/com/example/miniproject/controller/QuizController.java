@@ -34,13 +34,13 @@ public class QuizController {
 
     // 전체 퀴즈 리스트
     @GetMapping
-    public List<QuizResponseDto> findAll() {
+    public BasicResponseDto<List<QuizResponseDto>> findAll() {
         return quizService.findAll();
     }
 
     // 퀴즈 게시글 조회
     @GetMapping("/{quiz_id}")
-    public SolvingQuizResponseDto findById(@PathVariable Long quiz_id) {
+    public BasicResponseDto findById(@PathVariable Long quiz_id) {
         return quizService.findById(quiz_id);
     }
 
@@ -60,14 +60,14 @@ public class QuizController {
 
     // 퀴즈 게시글 수정하기
     @PutMapping("/{quiz_id}")
-    public QuizResponseDto update(@PathVariable Long quiz_id, @RequestBody AmendRequestDto amendRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public BasicResponseDto update(@PathVariable Long quiz_id, @RequestBody AmendRequestDto amendRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return quizService.update(quiz_id, amendRequestDto, userDetails.getUser());
     }
 
 
     // 퀴즈 게시글 삭제하기
     @DeleteMapping("/{quiz_id}")
-    public MsgResponseDto deleteAll(@PathVariable Long quiz_id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public BasicResponseDto deleteAll(@PathVariable Long quiz_id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return quizService.deleteAll(quiz_id, userDetails.getUser());
     }
 

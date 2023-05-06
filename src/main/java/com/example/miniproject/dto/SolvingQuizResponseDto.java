@@ -17,6 +17,7 @@ public class SolvingQuizResponseDto {
     private List<String> answerList;
     private String userId;
     private boolean solved;
+    private List<Comment> commentList;
 
     public SolvingQuizResponseDto(Long id, String title, String content, List<String> answerList, String userId) {
         this.id = id;

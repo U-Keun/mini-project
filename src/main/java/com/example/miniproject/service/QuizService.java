@@ -37,13 +37,14 @@ public class QuizService {
     public BasicResponseDto<SolvingQuizResponseDto> findById(Long id) {
         Quiz quiz = quizRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 퀴즈가 없습니다."));
         List<String> answerList = new ArrayList<>();
+
         answerList.add(quiz.getCorrect());
         if (quiz.getIncorrect1()!=null) {answerList.add(quiz.getIncorrect1());}
         if (quiz.getIncorrect2()!=null) {answerList.add(quiz.getIncorrect2());}
         if (quiz.getIncorrect3()!=null) {answerList.add(quiz.getIncorrect3());}
         Collections.shuffle(answerList);
 
-        return new SolvingQuizResponseDto(quiz.getId(),quiz.getContent(), quiz.getTitle(), answerList, quiz.getUserId());
+        return BasicResponseDto.setSuccess("퀴즈 조회 성공!", new SolvingQuizResponseDto(quiz, answerList));
     }
 
     // 전체 퀴즈 조회
@@ -79,7 +80,6 @@ public class QuizService {
         }
     }
 
-
     // 퀴즈 게시물 수정
     @Transactional
     public BasicResponseDto<?> update(Long id, AmendRequestDto amendRequestDto, User user) {
@@ -97,10 +97,11 @@ public class QuizService {
 
     // 퀴즈 게시물 삭제
     @Transactional
-    public MsgResponseDto deleteAll(Long id, User user) {
+    public BasicResponseDto<?> deleteAll(Long id, User user) {
         Quiz quiz = quizRepository.findById(id).orElseThrow(
                 () -> new NullPointerException("해당 퀴즈가 없습니다.")
         );
+
         if(!StringUtils.equals(quiz.getId(), user.getId())) {
             return BasicResponseDto.setFailed("퀴즈의 작성자만 삭제가가 가능합니다.");
         }
