@@ -7,15 +7,10 @@ import com.example.miniproject.entity.User;
 import com.example.miniproject.security.UserDetailsImpl;
 import com.example.miniproject.service.QuizService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
-import java.security.Principal;
 import java.util.List;
 
 @RestController
