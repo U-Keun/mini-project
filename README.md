@@ -8,7 +8,7 @@
 - 깃허브 주소
     - FE: https://github.com/Undong00/physical99_FE
     - BE: https://github.com/gengar0917/mini-project.git
-- 발표 내용
+- 내용
     - 프로젝트 제목, 컨셉
         - 삐질걸99
         - 항해99 14기 인원들이 본인의 TMI를 퀴즈로 만들어서 등록하고, 다른 사람의 퀴즈를 맞춰보는 웹 애플리케이션
@@ -18,7 +18,7 @@
         - DB : MariaDB
         - Deploy : AWS S3, AWS EC2, AWS RDS
         - IDE : VSCode, IntelliJ
-    - 주요 기능 설명
+    - 주요 기능
         - 회원 가입, 로그인, 로그아웃
             - 아이디 중복 처리
         - 퀴즈 게시글 CRUD
